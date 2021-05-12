@@ -1,0 +1,74 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var le = (List<DataContext.ViewModel.TopicLeModel>)ViewBag.ListLe;
+}
+
+<h2>Đề Tài Nghiên Cứu Khoa Học</h2>
+<div id="content">
+    <ul id="tabs" class="nav nav-tabs" data-tabbs="tabs">
+        <li class="active" style="width:100px">
+            <a href="#tab1" data-toggle="tab">Giảng Viên</a>
+        </li>
+        <li style="width:100px">
+            <a href="#tab2" data-toggle="tab">Sinh Viên</a>
+        </li>
+    </ul>
+    <div id="" class="tab-content">
+        <div class="tab-pane active" id="tab1">
+            <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" >
+                <thead>
+                    <tr>
+                        <th style="width: 3%;">Mã Đề Tài</th>
+                        <th style="width: 20%;">Tên Đề Tài</th>
+                        <th style="width:10%;">Giảng Viên</th>
+                        <th style="width: 5%;">Bắt Đầu</th>
+                        <th style="width: 5%;">Thời Gian(Tháng)</th>
+                        <th style="width: 3%;">Kinh Phí(VND)</th>
+                        <th style="width: 5%;">Trạng Thái</th>
+
+
+
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in le)
+                    {
+                    <td>@item.IdTp</td>
+                    <td>@item.Name</td>
+                    <td>@item.NameLe</td>
+                    <td>@item.DateSt.ToShortDateString()</td>
+                    <td>@item.Times</td>
+                    <td>@string.Format("{0:#,0}", item.Expense)</td>
+                }
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="tab-pane" id="tab2">
+                <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+                    <thead>
+                        <tr role="row">
+                            <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 3%;">Stt</th>
+                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 20%;">Tên Đề Tài</th>
+                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width:10%;">Giảng Viên</th>
+                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 5%;">Bắt Đầu</th>
+                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 5%;">Thời Gian(Tháng)</th>
+                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 3%;">Kinh Phí</th>
+                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 5%;">Trạng Thái</th>
+
+
+
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                    </tbody>
+                </table>
+                àaafadas
+            </div>
+        </div>
+
+    </div>

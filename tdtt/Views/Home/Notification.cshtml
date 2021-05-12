@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewBag.Title = "Thông Báo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var noti = (List<DataContext.DataTable.Notification>)ViewBag.Notifications;
+}
+<div class="page-title">
+    <span class="ums-icon-30 ums-icon-notify "></span>
+    <strong>THÔNG BÁO</strong>
+</div>
+<hr />
+<div class="row-cols-lg-12">
+    @foreach (var item in noti)
+    {
+        var url = "/thong-bao/" + @item.MetaTile + "-" + @item.IdNo;
+        <li>
+            <a id="" href="@url"> @item.Title</a><small>[@item.DateCreat]</small>
+        </li>
+
+    }
+</div>
+
+
+

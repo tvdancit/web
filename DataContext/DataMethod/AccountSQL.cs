@@ -1,0 +1,135 @@
+﻿using DataContext.DataTable;
+using DataContext.ViewModel;
+using PagedList;
+using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DataContext.DataMethod
+{
+
+
+
+    public class AccountSQL
+    {
+        DataConnect connect;
+        public AccountSQL()
+        {
+            connect = new DataConnect();
+        }
+        public int InsertAcc(string user, string pass, int access)
+        {
+            if (FindByUser(user) == true)
+            {
+                return 0;
+            }
+            else
+            {
+                object[] para =
+                {
+                    new SqlParameter("@userName",user),
+                    new SqlParameter("@passWord", pass),
+                    new SqlParameter("@access", access),
+                };
+                int res = connect.Database.ExecuteSqlCommand("Insert_Account @userName,@passWord,@access ", para);
+                return res;
+            }
+
+        }
+
+        public Account GetByUser(string user)
+        {
+            return connect.Accounts.SingleOrDefault(m => m.UserName == user);
+        }
+        public Account DetailbyUser(string user)
+        {
+            return connect.Accounts.Find(user);
+        }
+        public bool FindByUser(string user,string pass = null)
+        {
+            var find = connect.Accounts.Where(m => m.UserName == user && m.PassWord==pass).ToList();
+            if (find.Count > 0)
+                return true;
+            else return false;
+        }
+
+        public IEnumerable<Account> getListAcc(string seach, int page, int pagesize)
+        {
+            IQueryable<Account> res = connect.Accounts;
+            if (!string.IsNullOrEmpty(seach))
+            {
+                res = res.Where(x => x.UserName.Contains(seach));
+            }
+            return res.OrderBy(x => x.UserName).ToPagedList(page, pagesize);
+        }
+        public bool Login(string user, string pass)
+        {
+            var res = connect.Accounts.SingleOrDefault(m => m.UserName == user && m.PassWord == pass);
+            if (res != null)
+            {
+                if (res.Status == 0)
+                    return true;
+                else
+                    return false;
+            }
+            return false;
+
+
+        }
+        public bool UpdateAccount(string username, int access, int status)
+        {
+            try
+            {
+                var acc = connect.Accounts.Find(username);
+                if (access != null)
+                    acc.Access = access;
+                if (status != null)
+                    acc.Status = status;
+                connect.SaveChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+        public bool ChangePassword(string user, string pass)
+        {
+            try
+            {
+                var acc = connect.Accounts.Find(user);
+
+                acc.PassWord = pass;
+                connect.SaveChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+
+        }
+        public List<InfomationViewModel> getInfo(string username)
+        {
+            var res = from i in connect.Information
+                      join d in connect.Departments on i.IdKhoa equals d.IdKhoa where i.UserName==username
+                      select new InfomationViewModel
+                      {
+                          IdLe = i.IdLe,
+                          Name = i.Name,
+                          Email = i.Email,
+                          Phone = i.Phone,
+                          UserName = i.UserName,
+                          NameD = d.Name
+                      };
+            return res.ToList();
+        }
+
+    }
+
+
+
+}

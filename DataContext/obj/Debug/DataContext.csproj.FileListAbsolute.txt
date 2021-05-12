@@ -1,0 +1,16 @@
+D:\Back-end\tdtt\DataContext\bin\Debug\DataContext.dll.config
+D:\Back-end\tdtt\DataContext\bin\Debug\DataContext.dll
+D:\Back-end\tdtt\DataContext\bin\Debug\DataContext.pdb
+D:\Back-end\tdtt\DataContext\bin\Debug\EntityFramework.dll
+D:\Back-end\tdtt\DataContext\bin\Debug\EntityFramework.SqlServer.dll
+D:\Back-end\tdtt\DataContext\bin\Debug\PagedList.dll
+D:\Back-end\tdtt\DataContext\bin\Debug\PagedList.Mvc.dll
+D:\Back-end\tdtt\DataContext\bin\Debug\EntityFramework.xml
+D:\Back-end\tdtt\DataContext\bin\Debug\EntityFramework.SqlServer.xml
+D:\Back-end\tdtt\DataContext\bin\Debug\PagedList.xml
+D:\Back-end\tdtt\DataContext\bin\Debug\PagedList.Mvc.xml
+D:\Back-end\tdtt\DataContext\obj\Debug\DataContext.csprojAssemblyReference.cache
+D:\Back-end\tdtt\DataContext\obj\Debug\DataContext.csproj.CoreCompileInputs.cache
+D:\Back-end\tdtt\DataContext\obj\Debug\DataContext.csproj.CopyComplete
+D:\Back-end\tdtt\DataContext\obj\Debug\DataContext.dll
+D:\Back-end\tdtt\DataContext\obj\Debug\DataContext.pdb
