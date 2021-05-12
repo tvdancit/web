@@ -14,7 +14,7 @@ namespace tdtt.Controllers
         // GET: Account
         [HttpGet]
         public ActionResult FormChange()
-        {         
+        {
             return View();
         }
         [HttpPost]
@@ -45,17 +45,24 @@ namespace tdtt.Controllers
         {
             LoginSession sessions = (LoginSession)Session["user"];
             var model = new AccountSQL().getInfo(sessions.UserName);
-            if (model.Count>0)
+            if (model.Count > 0)
             {
                 return View(model);
             }
             else
                 return View("Infomation");
-           
+
         }
         public ActionResult Infomation()
         {
-            return View();
+            LoginSession sessions = (LoginSession)Session["user"];
+            var model = new AccountSQL().getInfo(sessions.UserName);
+            if (model.Count > 0)
+            {
+                return View(model);
+            }
+            else
+                return View();
         }
     }
 }
