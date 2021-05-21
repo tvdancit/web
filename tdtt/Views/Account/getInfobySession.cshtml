@@ -1,4 +1,4 @@
-﻿@model List<DataContext.ViewModel.InfomationViewModel>
+﻿@model DataContext.ViewModel.InfomationViewModel
 
 @{
     ViewBag.Title = "Thông Tin Cá Nhân";
@@ -10,25 +10,23 @@
     <h4>Thông Tin Cá Nhân</h4>
     <hr />
     <dl class="dl-horizontal">
-        @foreach (var item in Model)
-        {
+        
             <div>
                 <h6>Mã Giảng Viên</h6>
-                <p>@item.IdLe</p>
+                <p>@Model.IdLe</p>
 
-                <p>@item.Name</p>
-                <p>@item.Email</p>
+                <p>@Model.Name</p>
+                <p>@Model.Email</p>
 
-                <p>@item.Phone</p>
-                <p>@item.NameD</p>
+                <p>@Model.Phone</p>
+                <p>@Model.NameD</p>
             </div>
 
 
-        }
 
 
     </dl>
-    <a href="">
+    <a href="@Url.Action("UpdateInfo","Account")">
         <form>
             <input type="button" value="Cập Nhật Thông Tin" class="btn btn-facebook" />
         </form>

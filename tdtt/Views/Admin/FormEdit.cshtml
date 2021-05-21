@@ -1,56 +1,49 @@
 ﻿@model DataContext.DataTable.Account
+
 @{
     ViewBag.Title = "FormEdit";
     Layout = "~/Views/Shared/_Layout.cshtml";
     string user = ViewBag.User;
 }
+
+<h2>FormEdit</h2>
+
+
 @using (Html.BeginForm("Update", "Admin", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4 style="text-align:center">Cập Nhật Tài Khoản</h4>
+        <h4>Account</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.UserName)
-
         <div class="form-group">
-            <label class="control-label col-md-2">Tài Khoản</label>
+            @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(m => m.UserName, new { htmlAttributes = new { @text = user, @class = "form-control" } })
+                @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @text = user, @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
             </div>
         </div>
-        <hr />
 
         <div class="form-group">
-            <label class="control-label col-md-2">Quyền Truy Cập</label>
+            @Html.LabelFor(model => model.Access, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Access, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(model => model.Access,null, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Access, "", new { @class = "text-danger" })
             </div>
-
         </div>
-        <hr />
 
         <div class="form-group">
-            <label class="control-label col-md-2">Trạng Thái Hoạt Động</label>
+            @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(m => m.Status, new { htmlAttributes = new { @text = "0", @class = "form-control" } })
+                @Html.DropDownListFor(model => model.Status,null, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
             </div>
-            <hr />
-            <div style=" color: red; margin-left: 80px;">
-                <h6>0: Đang Hoạt Động</h6>
-                <h6>1:Vô Hiệu</h6>
-            </div>
-
         </div>
-        <hr />
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Cập Nhật" class="btn btn-facebook" />
+                <input type="submit" value="Lưu" class="btn btn-facebook" />
             </div>
         </div>
     </div>
@@ -59,5 +52,4 @@
 <div>
     <a href="@Url.Action("Index","Admin")"><< Quay lại danh sách</a>
 </div>
-
 

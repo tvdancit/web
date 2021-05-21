@@ -1,4 +1,5 @@
 ﻿using DataContext.DataMethod;
+using DataContext.DataTable;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +10,10 @@ using tdtt.Models.Login;
 
 namespace tdtt.Controllers
 {
+
     public class AccountController : BaseController
     {
+       
         // GET: Account
         [HttpGet]
         public ActionResult FormChange()
@@ -45,7 +48,7 @@ namespace tdtt.Controllers
         {
             LoginSession sessions = (LoginSession)Session["user"];
             var model = new AccountSQL().getInfo(sessions.UserName);
-            if (model.Count > 0)
+            if (model!=null)
             {
                 return View(model);
             }
@@ -57,12 +60,33 @@ namespace tdtt.Controllers
         {
             LoginSession sessions = (LoginSession)Session["user"];
             var model = new AccountSQL().getInfo(sessions.UserName);
-            if (model.Count > 0)
+            if (model!=null)
             {
                 return View(model);
             }
             else
                 return View();
+        }
+        public ActionResult UpdateInfo()
+        {
+            LoginSession sessions = (LoginSession)Session["user"];
+            var model = new AccountSQL().GetInformation(sessions.UserName);
+            var list = new DepartmentSQL().GetDepartments();
+            ViewBag.IdKhoa = new SelectList(list, "IdKhoa", "Name", null);
+            return View(model);
+        }
+        public ActionResult Update(Information information)
+        {
+            LoginSession sessions = (LoginSession)Session["user"];
+            bool res = new AccountSQL().Update(information, sessions.UserName);
+            if (res==false)
+            {
+                ModelState.AddModelError("", "Lỗi");
+            }
+            else
+                ModelState.AddModelError("", "Cập nhật thành công");
+            return View("UpdateInfo");
+
         }
     }
 }

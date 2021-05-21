@@ -70,7 +70,7 @@ namespace DataContext.DataMethod
             var res = connect.Accounts.SingleOrDefault(m => m.UserName == user && m.PassWord == pass);
             if (res != null)
             {
-                if (res.Status == 0)
+                if (res.Status == "0")
                     return true;
                 else
                     return false;
@@ -79,7 +79,7 @@ namespace DataContext.DataMethod
 
 
         }
-        public bool UpdateAccount(string username, int access, int status)
+        public bool UpdateAccount(string username, int access, string status)
         {
             try
             {
@@ -87,7 +87,7 @@ namespace DataContext.DataMethod
                 if (access != null)
                     acc.Access = access;
                 if (status != null)
-                    acc.Status = status;
+                    acc.Status =status;
                 connect.SaveChanges();
                 return true;
             }
@@ -112,7 +112,7 @@ namespace DataContext.DataMethod
             }
 
         }
-        public List<InfomationViewModel> getInfo(string username)
+        public InfomationViewModel getInfo(string username)
         {
             var res = from i in connect.Information
                       join d in connect.Departments on i.IdKhoa equals d.IdKhoa where i.UserName==username
@@ -125,9 +125,35 @@ namespace DataContext.DataMethod
                           UserName = i.UserName,
                           NameD = d.Name
                       };
-            return res.ToList();
+            return res.First();
         }
+        // lây thông tin để cập nhật
+        public Information GetInformation(string username)
+        {
+            return connect.Information.Where(x => x.UserName == username).FirstOrDefault();
+        }
+        public bool Update(Information information,string username)
+        {
+            var model = connect.Information.Where(x => x.UserName == username).Single();
+            if(model!=null)
+            {
+                if (model.IdLe != information.IdLe || model.Name != information.Name ||
+                   model.IdKhoa != information.IdKhoa || model.Email != information.Email || model.Phone != information.Phone)
+                {
+                    model.IdLe = information.IdLe;
+                    model.Name = information.Name;
+                    model.IdKhoa = information.IdKhoa;
+                    model.Email = information.Email;
+                    model.Phone = information.Phone;
+                    connect.SaveChanges();
+                    var model1 = connect.Information.Where(x => x.UserName == username).Single();
+                    return true;
+                }
+            }
 
+
+            return false;
+        }
     }
 
 

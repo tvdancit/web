@@ -40,7 +40,7 @@
                         <div class="form-group">
                             <label for="username" class="text-info">Quyền Truy Cập</label>
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.Access, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.DropDownListFor(model => model.Access,null, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.Access, "", new { @class = "text-danger" })
                             </div>
                         </div>

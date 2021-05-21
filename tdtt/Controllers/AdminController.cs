@@ -24,7 +24,7 @@ namespace tdtt.Controllers
         // them tai khoan- ham insert
         public ActionResult FormInsert()
         {
-           
+            Setlist();
             return View();
         }
         public ActionResult Create(AccountModel model)
@@ -47,7 +47,7 @@ namespace tdtt.Controllers
         #region
         public ActionResult FormEdit(string id)
         {
-            
+            Setlist();
             var model = new AccountSQL().DetailbyUser(id);
             ViewBag.User = id;
             return View(model);
@@ -86,6 +86,14 @@ namespace tdtt.Controllers
 
             return View("FormtAccess");
         }
+        public void Setlist()
+        {
+            var model = new AccesSQL().ListAc();
+            ViewBag.Access = new SelectList(model, "Id", "Name", null);
+            ViewBag.Status = new List<SelectListItem> {
+                       new SelectListItem { Value = "0" , Text = "Hoat động" },
+                       new SelectListItem { Value = "1" , Text = "Vô hiệu Hóa" }, };
 
+        }
     }
 }

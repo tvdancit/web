@@ -61,6 +61,7 @@
   <ItemGroup>
     <Compile Include="DataMethod\AccessSQL.cs" />
     <Compile Include="DataMethod\AccountSQL.cs" />
+    <Compile Include="DataMethod\DepartmentSQL.cs" />
     <Compile Include="DataMethod\HashMD5.cs" />
     <Compile Include="DataMethod\NotificationSQL.cs" />
     <Compile Include="DataMethod\StatementSQL.cs" />

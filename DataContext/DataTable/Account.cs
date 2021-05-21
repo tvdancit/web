@@ -24,7 +24,7 @@ namespace DataContext.DataTable
 
         public int Access { get; set; }
 
-        public int? Status { get; set; }
+        public string Status { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Information> Information { get; set; }

@@ -17,6 +17,6 @@ namespace tdtt.Models.Account
         [Required]
         public int Access { set; get; }
 
-        public int Status { get; set; }
+        public string Status { get; set; }
     }
 }
