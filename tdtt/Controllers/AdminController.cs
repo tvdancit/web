@@ -41,7 +41,7 @@ namespace tdtt.Controllers
                     ModelState.AddModelError("", "Tài Khoản Đã Tồn Tại");
 
             }
-            return View("FormAccount");
+            return RedirectToAction("FormInsert");
         }
         // edit tai khoan
         #region
@@ -58,41 +58,22 @@ namespace tdtt.Controllers
             if (update == true)
                 ModelState.AddModelError("", "Cập Nhật Thành Công");
             else ModelState.AddModelError("", "Cập Nhật Lỗi");
-            return View("FormEdit");
+            return RedirectToAction("FormEdit");
         }
         #endregion
-        // quyen tuy cap
-        public ActionResult QTC()
-        {
-            var model = new AccesSQL().ListAc();
-            return View(model);
-        }
-        public ActionResult FormtAccess()
-        {
-            ViewBag.tbacc = new AccesSQL().ListAc();
-            return View();
-        }
-        public ActionResult Add(Access access)
-        {
-            int id = new AccesSQL().getLastAcces();
-            access.id = id + 1;
-            var res = new AccesSQL().createAccess(access);
-            if(res>0)
-            {
-                ModelState.AddModelError("", "Thêm Thành Công");
-
-            }
-            else ModelState.AddModelError("", "Lỗi");
-
-            return View("FormtAccess");
-        }
         public void Setlist()
         {
-            var model = new AccesSQL().ListAc();
-            ViewBag.Access = new SelectList(model, "Id", "Name", null);
+
+            ViewBag.Access = new List<SelectListItem>{
+                       new SelectListItem { Value = "0" , Text = "Admin" },
+                       new SelectListItem { Value = "1" , Text = "Phòng Nghiên Cứu Khoa Học" },
+                        new SelectListItem { Value = "2" , Text = "Giảng Viên" },
+                         new SelectListItem { Value = "1" , Text = "Sinh Viên" }
+            };
             ViewBag.Status = new List<SelectListItem> {
                        new SelectListItem { Value = "0" , Text = "Hoat động" },
-                       new SelectListItem { Value = "1" , Text = "Vô hiệu Hóa" }, };
+                       new SelectListItem { Value = "1" , Text = "Vô hiệu Hóa" }
+            };
 
         }
     }

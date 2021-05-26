@@ -1,0 +1,149 @@
+﻿@model DataContext.ViewModel.TopicSt
+
+@{
+    ViewBag.Title = "CreateTopicStd";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>CreateTopicStd</h2>
+
+@using (Html.BeginForm("create","Home",FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>TopicOfStudent</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <label class="control-label col-md-2">Tên Đề Tài</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Mục Tiêu Của Đề Tài</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Target, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Target, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Nôi Dung Thưc Hiện</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Content, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Họ Tên SInh Viên</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NameSt, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NameSt, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Mã Số Sinh Viên</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.IdSV, new { htmlAttributes = new { @class = "form-control" ,@type="text",@maxlenght=10} })
+                @Html.ValidationMessageFor(model => model.IdSV, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Email</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" ,@type="email"} })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Lĩnh Vực</label>
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.IdTy, new SelectList(ViewBag.Type, "IdTy", "Name"), "Chọn Lĩnh Vực", new
+                { @class = "form-cont", @onchange = "ChangeValue()" })
+                @Html.ValidationMessageFor(model => model.IdP, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Nhiệm Vụ</label>
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.IdP, new SelectList(ViewBag.Point, "IdP", "NameP"), "Chọn Nhiệm Vụ",
+               new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.IdP, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Ngày Bắt Đầu</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DateSt, new { htmlAttributes = new { @class = "form-control",@type="date"} })
+                @Html.ValidationMessageFor(model => model.DateSt, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Thời Gian Thực Hiện</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Times, new { htmlAttributes = new { @class = "form-control", @type = "number" } })
+                @Html.ValidationMessageFor(model => model.Times, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Đăng Ký" class="btn btn-facebook" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Về Trang Chủ", "Index")
+</div>
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryui")
+    @Styles.Render("~/Content/cssjqryUi")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('input[type=datetime]').datepicker({
+                dateFormat: "dd/mm/yy",
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "-60:+0"
+            });
+
+        });
+    </script>
+    <script>
+        function ChangeValue() {
+            var id = $("#IdP").val();
+            $.ajax({
+                url: '/Home/CreateTopicStd',
+                type: 'GET',
+                dataType: "JSON",
+                data: { Type: id },
+                success: function (point) {
+                    $("#IdP").html("");
+                    $.each(point, function (i, ptb))
+                    {
+                        $("#IdP").append(
+                            $('<option></option>').val(ptb.Idp).html(ptb.Name));
+
+                    });
+        }
+
+                });
+            }
+    </script>
+
+}

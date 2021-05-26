@@ -59,14 +59,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataMethod\AccessSQL.cs" />
     <Compile Include="DataMethod\AccountSQL.cs" />
     <Compile Include="DataMethod\DepartmentSQL.cs" />
     <Compile Include="DataMethod\HashMD5.cs" />
     <Compile Include="DataMethod\NotificationSQL.cs" />
+    <Compile Include="DataMethod\PointSQL.cs" />
     <Compile Include="DataMethod\StatementSQL.cs" />
     <Compile Include="DataMethod\TopicLeSQL.cs" />
-    <Compile Include="DataTable\Access.cs" />
+    <Compile Include="DataMethod\TopicStdSQL.cs" />
     <Compile Include="DataTable\Account.cs" />
     <Compile Include="DataTable\DataConnect.cs" />
     <Compile Include="DataTable\Department.cs" />
@@ -82,8 +82,11 @@
     <Compile Include="DataTable\TopicOfStudent.cs" />
     <Compile Include="DataTable\Type.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\detailTopic.cs" />
     <Compile Include="ViewModel\InfomationViewModel.cs" />
+    <Compile Include="ViewModel\TopicLecuter.cs" />
     <Compile Include="ViewModel\TopicLeModel.cs" />
+    <Compile Include="ViewModel\TopicSt.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

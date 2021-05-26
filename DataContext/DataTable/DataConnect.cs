@@ -12,7 +12,7 @@ namespace DataContext.DataTable
         {
         }
 
-        public virtual DbSet<Access> Accesses { get; set; }
+       
         public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<Department> Departments { get; set; }
         public virtual DbSet<DetailNotifi> DetailNotifis { get; set; }

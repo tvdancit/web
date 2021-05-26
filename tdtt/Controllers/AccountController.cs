@@ -10,11 +10,27 @@ using tdtt.Models.Login;
 
 namespace tdtt.Controllers
 {
-
     public class AccountController : BaseController
     {
-       
+
         // GET: Account
+
+        //thông tin tài khoản
+        public ActionResult Index()
+        {
+            LoginSession sessions = (LoginSession)Session["user"];
+            var model = new AccountSQL().getInfo(sessions.UserName);
+            if (model != null)
+            {
+                return View(model);
+            }
+            else
+                setlist();
+            return View("Check");
+
+        }
+        // đồi mật khẩu
+        #region
         [HttpGet]
         public ActionResult FormChange()
         {
@@ -33,6 +49,7 @@ namespace tdtt.Controllers
                     if (change == true)
                     {
                         ModelState.AddModelError("", "Đổi Mật Khẩu Thành Công");
+                        return RedirectToAction("Index");
                     }
                     else
                         ModelState.AddModelError("", "Lỗi!!! Vui Lòng Thử Lại Sau");
@@ -44,49 +61,42 @@ namespace tdtt.Controllers
                 ModelState.AddModelError("", "Bạn Đã Nhập Sai Mật Khẩu");
             return View("FormChange");
         }
-        public ActionResult getInfobySession()
+        #endregion
+        //kiemr tra thông tin có thì về trang thông tin chưa thì về trang cập nhật
+        #region
+        public ActionResult Check()
         {
-            LoginSession sessions = (LoginSession)Session["user"];
-            var model = new AccountSQL().getInfo(sessions.UserName);
-            if (model!=null)
-            {
-                return View(model);
-            }
-            else
-                return View("Infomation");
+            return View();
 
         }
-        public ActionResult Infomation()
-        {
-            LoginSession sessions = (LoginSession)Session["user"];
-            var model = new AccountSQL().getInfo(sessions.UserName);
-            if (model!=null)
-            {
-                return View(model);
-            }
-            else
-                return View();
-        }
+        #endregion
+        // cập nhật sửa đổi thông tin
+        #region
         public ActionResult UpdateInfo()
         {
             LoginSession sessions = (LoginSession)Session["user"];
             var model = new AccountSQL().GetInformation(sessions.UserName);
-            var list = new DepartmentSQL().GetDepartments();
-            ViewBag.IdKhoa = new SelectList(list, "IdKhoa", "Name", null);
+            setlist();
             return View(model);
         }
         public ActionResult Update(Information information)
         {
             LoginSession sessions = (LoginSession)Session["user"];
             bool res = new AccountSQL().Update(information, sessions.UserName);
-            if (res==false)
+            if (res == false)
             {
                 ModelState.AddModelError("", "Lỗi");
             }
             else
-                ModelState.AddModelError("", "Cập nhật thành công");
-            return View("UpdateInfo");
+                return RedirectToAction("Index");
+            return RedirectToAction("UpdateInfo");
 
+        }
+        #endregion
+        public void setlist()
+        {
+            var list = new DepartmentSQL().GetDepartments();
+            ViewBag.IdKhoa = new SelectList(list, "IdKhoa", "Name", null);
         }
     }
 }

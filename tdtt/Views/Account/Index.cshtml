@@ -1,0 +1,35 @@
+﻿@model DataContext.ViewModel.InfomationViewModel
+
+@{
+    ViewBag.Title = "Thông Tin Cá Nhân";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div>
+    <h4>Thông Tin Cá Nhân</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <div>
+            <h6>Mã Giảng Viên</h6>
+            <p>@Model.IdLe</p>
+
+            <p>@Model.Name</p>
+            <p>@Model.Email</p>
+
+            <p>@Model.Phone</p>
+            <p>@Model.NameD</p>
+        </div>
+
+
+
+
+    </dl>
+    <a href="@Url.Action("UpdateInfo","Account")">
+        <form>
+            <input type="button" value="Cập Nhật Thông Tin" class="btn btn-facebook" />
+        </form>
+    </a>
+</div>
+

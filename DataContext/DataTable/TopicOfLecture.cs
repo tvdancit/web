@@ -17,11 +17,18 @@ namespace DataContext.DataTable
         }
 
         [Key]
-        [StringLength(10)]
+        [StringLength(20)]
         public string IdTp { get; set; }
 
         [Column(TypeName = "ntext")]
         public string Name { get; set; }
+
+        [Column(TypeName = "ntext")]
+        public string Target { get; set; }
+
+        [Column(TypeName = "ntext")]
+        public string Content { get; set; }
+
 
         [StringLength(10)]
         public string IdLe { get; set; }

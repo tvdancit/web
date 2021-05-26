@@ -125,7 +125,11 @@ namespace DataContext.DataMethod
                           UserName = i.UserName,
                           NameD = d.Name
                       };
-            return res.First();
+            res.FirstOrDefault();
+            if (res != null)
+                return res.FirstOrDefault();
+            else return null;
+
         }
         // lây thông tin để cập nhật
         public Information GetInformation(string username)

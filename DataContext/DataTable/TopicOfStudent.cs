@@ -10,11 +10,17 @@ namespace DataContext.DataTable
     public partial class TopicOfStudent
     {
         [Key]
-        [StringLength(10)]
+        [StringLength(20)]
         public string IdTp { get; set; }
 
         [Column(TypeName = "ntext")]
         public string Name { get; set; }
+
+        [Column(TypeName = "ntext")]
+        public string Target { get; set; }
+
+        [Column(TypeName = "ntext")]
+        public string Content { get; set; }
 
         [Column(TypeName = "ntext")]
         public string NameSt { get; set; }
@@ -28,8 +34,10 @@ namespace DataContext.DataTable
         [StringLength(10)]
         public string IdP { get; set; }
 
-        [Column(TypeName = "date")]
-        public DateTime? DateSt { get; set; }
+        //[Column(TypeName = "date")]
+        [DataType(DataType.DateTime)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MMM/yyyy}")]
+        public DateTime DateSt { get; set; }
 
         public int? Times { get; set; }
 
