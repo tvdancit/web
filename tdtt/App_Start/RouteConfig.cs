@@ -15,7 +15,11 @@ namespace tdtt
 
             //
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-
+            routes.MapRoute(
+            name: "Chi Tiet",
+            url: "de-tai/{id}",
+            defaults: new { controller = "Topic", action = "Details", id = UrlParameter.Optional }
+          );
             routes.MapRoute(
              name: "Detail",
              url: "thong-bao/{MetaTitle}-{id}",

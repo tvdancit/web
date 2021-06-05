@@ -13,16 +13,16 @@
 <table class="table">
     <tr style=" font-size:small">
         <th>
-           Mẫ Đề Tài
+           Mẫ Nhiệm Vụ
         </th>
         <th>
-          Tên Đề Tài
+          Tên Nhiện VỤ
         </th>
         <th>
            Thể Loại
         </th>
         <th>
-            Ngày Thực Hiện
+           Ngày Thực Hiện
         </th>
         <th>
            Thời Gian
@@ -34,7 +34,7 @@
             Trạng Thái
         </th>
         <th>
-           Kết QUả
+           Kết Quả
         </th>
     </tr>
 
@@ -45,7 +45,8 @@
         @item.IdTp
     </td>
     <td>
-        @item.Name
+        <a href="/de-tai/@item.IdTp"> @item.Name</a>
+       
     </td>
     <td>
         @item.NameP
@@ -59,20 +60,20 @@
     <td>
         @string.Format("{0:#,0}", item.Expense)
     </td>
-    @if (item.Status == 1)
+    @if (item.Status == 2)
     {
         <td>
             Chưa Duyệt
         </td>
     }
-    else if (item.Status == 2)
+    else if (item.Status == 1)
     {
         <td>
             Đã Duyệt
         </td>
     }
     else if (item.Status
-        == 3)
+        == 0)
     {
         <td>
             Bị Hủy

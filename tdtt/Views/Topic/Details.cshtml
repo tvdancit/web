@@ -1,97 +1,93 @@
 ﻿@model DataContext.ViewModel.detailTopic
 
 @{
-    ViewBag.Title = "Chi tiết đề tài";
+    ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var pro = (List<DataContext.DataTable.ProgressLe>)ViewBag.Progress;
+    var date = (DateTime)Model.DateSt;
+    int stt = (int)Model.Status;
 }
 
-<h2>Details</h2>
-
-<div>
-    <h4>TopicOfLecture</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.IdTp)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DateSt)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DateSt)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Times)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Times)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Expense)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Expense)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Status)
-        </dd>
-
-    </dl>
-    <div class="alert alert-success" role="alert">
-        <strong>Qua trinh thuc hien</strong>
-        <br>
-
-        @if (pro.Count > 0)
-        {
-            foreach (var item in pro)
-            {
-                <p>@item.Date  : @item.Status</p>
-            }
-
-        }
-        else
-        {
-            <p>Chua co ban bao cao</p>
-        }
-
-
-
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Chi tiết đề tài @Model.Name</h6>
     </div>
+    <div class="card-body">
+        <div class="">
+            <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                <div class="row">
+                    <div>
+                        <dl class="dl-horizontal">
 
+                            <dd>
+                                <label>Mã Nhiệm Vụ: </label><br />@Html.DisplayFor(model => model.IdTp)
+                            </dd>
+
+                            <dd>
+                                <label>Tên Nhiệm Vụ: </label><br /> @Html.DisplayFor(model => model.Name)
+                            </dd>
+
+                            <dd>
+                                <label>Loại Nhiệm Vụ :</label><br /> @Html.DisplayFor(model => model.name)
+                            </dd>
+
+                            <dd>
+                                <label>Mục Tiêu : </label><br /> @Html.DisplayFor(model => model.Target)
+                            </dd>
+
+                            <dd>
+                                <label>Nội Dung: </label><br />@Html.DisplayFor(model => model.Content)
+                            </dd>
+
+                            <dd>
+
+                                <label>Ngày Thực Hiện: </label><br /> @date.ToShortDateString()
+                            </dd>
+
+                            <dd>
+                                <label>Số Tháng Thực Hiện: </label><br />@Html.DisplayFor(model => model.Times)
+                            </dd>
+
+                            <dd>
+                                <label>Kinh Phí: </label><br />  @string.Format("{0:#,0}", Model.Expense) VND
+                               
+                            </dd>
+                            <dd>
+                                <label>Xét Duyệt: </label> @if (stt == 2)
+                                {
+                                    <p>Đang chờ</p>
+                                }
+                                else if (stt == 1)
+                                {
+                                    <p>Chấp Thuận</p>
+
+                                }
+                                else
+                                { <p>Không Chấp Thuận</p>}
+
+                            </dd>
+
+                        </dl>
+                    </div>
+                    <p>
+                        @if (stt == 2)
+                        {
+                            @Html.ActionLink("Edit", "Edit", new { id = Model.IdTp })
+                        }
+                        @if (stt == 1)
+                        {
+                            @Html.ActionLink("Gia Hạn", "Edit", new { /* id = Model.PrimaryKey */ })
+                            <small>||</small>
+                            @Html.ActionLink("Hủy Bỏ", "Edit", new { /* id = Model.PrimaryKey */ })
+                        }
+
+                        || @Html.ActionLink("Quay lại danh sách", "Index")
+                    </p>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
 </div>
-<p>
-    @if (Model.Status == 1)
-    {
-        @Html.ActionLink("Chinh Sua", "Edit", new { id = Model.IdTp })
-    }
-    |
-    @Html.ActionLink("Quay lai danh sach", "MyTopic", "Topic") |
-    @if (Model.Status == 2)
-    {
-        @Html.ActionLink("Gia han", "Edit", new { id = Model.IdTp })
-    }
-</p>
+
+

@@ -20,6 +20,7 @@ namespace DataContext.DataMethod
         {
             connect = new DataConnect();
         }
+        // thêm tai khoan
         public int InsertAcc(string user, string pass, int access)
         {
             if (FindByUser(user) == true)
@@ -39,15 +40,17 @@ namespace DataContext.DataMethod
             }
 
         }
-
+        // 
         public Account GetByUser(string user)
         {
             return connect.Accounts.SingleOrDefault(m => m.UserName == user);
         }
+        // chi tiet tai khoan
         public Account DetailbyUser(string user)
         {
             return connect.Accounts.Find(user);
         }
+        // tim username them mới
         public bool FindByUser(string user,string pass = null)
         {
             var find = connect.Accounts.Where(m => m.UserName == user && m.PassWord==pass).ToList();
@@ -55,7 +58,7 @@ namespace DataContext.DataMethod
                 return true;
             else return false;
         }
-
+        // danh sách tài khoản, tìm kiếm
         public IEnumerable<Account> getListAcc(string seach, int page, int pagesize)
         {
             IQueryable<Account> res = connect.Accounts;
@@ -65,6 +68,7 @@ namespace DataContext.DataMethod
             }
             return res.OrderBy(x => x.UserName).ToPagedList(page, pagesize);
         }
+        // đăng nhập
         public bool Login(string user, string pass)
         {
             var res = connect.Accounts.SingleOrDefault(m => m.UserName == user && m.PassWord == pass);
@@ -79,6 +83,7 @@ namespace DataContext.DataMethod
 
 
         }
+        // sửa tài khoản
         public bool UpdateAccount(string username, int access, string status)
         {
             try
@@ -96,6 +101,7 @@ namespace DataContext.DataMethod
                 return false;
             }
         }
+        // thay đổi mật khẩu
         public bool ChangePassword(string user, string pass)
         {
             try
@@ -112,6 +118,7 @@ namespace DataContext.DataMethod
             }
 
         }
+        // lấy thông tin theo session
         public InfomationViewModel getInfo(string username)
         {
             var res = from i in connect.Information
@@ -136,6 +143,7 @@ namespace DataContext.DataMethod
         {
             return connect.Information.Where(x => x.UserName == username).FirstOrDefault();
         }
+        // cập nhật
         public bool Update(Information information,string username)
         {
             var model = connect.Information.Where(x => x.UserName == username).Single();

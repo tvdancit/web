@@ -8,16 +8,10 @@ using System.Threading.Tasks;
 
 namespace DataContext.ViewModel
 {
-    public class detailTopic
+    public class TopicmdLe
     {
-        [StringLength(10)]
-        public string IdTp { get; set; }
-
         [Column(TypeName = "ntext")]
         public string Name { get; set; }
-
-        [StringLength(10)]
-        public string name { get; set; }
 
         [Column(TypeName = "ntext")]
         public string Target { get; set; }
@@ -25,13 +19,19 @@ namespace DataContext.ViewModel
         [Column(TypeName = "ntext")]
         public string Content { get; set; }
 
-        [Column(TypeName = "date")]
+        [StringLength(12)]
+        public string IdLe { get; set; }
+
+        [StringLength(10)]
+        public string IdP { get; set; }
+
+        //[Column(TypeName = "date")]
+        [DataType(DataType.DateTime)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MMM/yyyy}")]
         public DateTime DateSt { get; set; }
 
         public int? Times { get; set; }
 
         public double? Expense { get; set; }
-
-        public int? Status { get; set; }
     }
 }

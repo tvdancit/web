@@ -139,6 +139,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\TopicController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -279,7 +280,6 @@
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Account\Check.cshtml" />
     <Content Include="Views\Topic\MyTopic.cshtml" />
-    <Content Include="Views\Topic\Details.cshtml" />
     <Content Include="Views\Home\CreateTopicStd.cshtml" />
     <Content Include="Scripts\bootstrap.min.js.map" />
     <Content Include="Scripts\bootstrap.js.map" />
@@ -287,6 +287,10 @@
     <Content Include="Scripts\bootstrap.esm.js.map" />
     <Content Include="Scripts\bootstrap.bundle.min.js.map" />
     <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\Topic\Details.cshtml" />
+    <Content Include="Views\Topic\Edit.cshtml" />
+    <Content Include="Views\Topic\SignUpTopic.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataContext\DataContext.csproj">

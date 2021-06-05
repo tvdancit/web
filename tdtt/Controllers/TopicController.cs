@@ -1,4 +1,6 @@
 ﻿using DataContext.DataMethod;
+using DataContext.DataTable;
+using DataContext.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,18 +13,22 @@ namespace tdtt.Controllers
     public class TopicController : BaseController
     {
         // GET: Topic
-       
-        public ActionResult MyTopic()
+        public Information Information()
         {
             LoginSession user = (LoginSession)Session["User"];
             var info = new AccountSQL().GetInformation(user.UserName);
-            string id = info.IdLe;
+            return info;
+        }
+        public ActionResult MyTopic()
+        {
+
+            string id = Information().IdLe;
             var model = new TopicLeSQL().GetTopicOfLectures(id);
             return View(model);
         }
 
         // GET: Topic/Details/5
-        public ActionResult Details(string  id)
+        public ActionResult Details(string id)
         {
             var model = new TopicLeSQL().findTopic(id);
             ViewBag.Progress = new TopicLeSQL().getProcessbyId(model.IdTp);
@@ -30,31 +36,41 @@ namespace tdtt.Controllers
         }
 
         // GET: Topic/Create
-        public ActionResult Create()
+        public ActionResult SignUpTopic( bool Issucess= false)
         {
+            ViewBag.issucess = Issucess;
             return View();
         }
 
         // POST: Topic/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult SignUp(TopicmdLe topic)
         {
-            try
+            if(ModelState.IsValid)
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+                string i = new TopicLeSQL().getLastId(topic.IdP).ToString();
+                string ii = "LECT-" + topic.IdP + "000000";
+                string id = ii.Substring(0,ii.Length - i.Length) + i;
+                bool res = new TopicLeSQL().create(topic, id, Information().IdLe);
+                if (true == res)
+                {
+                    return RedirectToAction("SignUpTopic", new { Issucess = true });
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Đăng ký không thành công. Thử lại !!!");
+                   
+                }
             }
-            catch
-            {
-                return View();
-            }
+            return RedirectToAction("SignupTopic",new { Issucess =false});
         }
 
         // GET: Topic/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(string id)
         {
-            return View();
+            var model = new TopicLeSQL().getTopic(id);
+
+            return View(model);
         }
 
         // POST: Topic/Edit/5

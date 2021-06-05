@@ -31,6 +31,10 @@ namespace tdtt.Controllers
 
         public ActionResult DetailNo(long id)
         {
+            if(id == null)
+            {
+                RedirectToAction("Notification");
+            }    
             ViewBag.Notifications = new NotificationSQL().NotificationById(id);
             ViewBag.Detail = new NotificationSQL().GetDetails(id);
             return View();
@@ -51,7 +55,7 @@ namespace tdtt.Controllers
         }
         public ActionResult create(TopicSt st)
         {
-            string ii = "SV-" + st.IdP + "-000000";
+            string ii = "STD-" + st.IdP + "-000000";
             string i = new TopicStdSQL().getLastTopicStd(st.IdP).ToString();
             string id = ii.Substring(0, ii.Length - i.Length) + i;
             var result = new TopicStdSQL().AddTopicStd(st,id);

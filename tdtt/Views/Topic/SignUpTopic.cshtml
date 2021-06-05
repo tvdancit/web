@@ -1,0 +1,116 @@
+﻿@model DataContext.ViewModel.TopicmdLe
+
+@{
+    ViewBag.Title = "SignUpTopic";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@if (ViewBag.issucess)
+{
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Đăng ký thành công</strong> You should check in on some of those fields below.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+}
+
+<h2>SignUpTopic</h2>
+
+@using (Html.BeginForm("SignUp", "topic", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal" style="align-items:center">
+        <h4>TopicmdLe</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <label class="control-label col-md-2">Tên Nhiệm Vụ</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Mục Tiêu</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Target, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Target, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Nội Dung Thực Hiện</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Content, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Lĩnh Vực</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.IdLe, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.IdLe, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Loại Nhiệm Vụ</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.IdP, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.IdP, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Ngày Bắt Đầu</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DateSt, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+                @Html.ValidationMessageFor(model => model.DateSt, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Số Tháng Thực Hiên</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Times, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Times, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Chi phí</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Expense, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Expense, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Đăng Ký" class="btn btn-facebook" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+<script>
+    $(function () {
+
+        $("form").submit(function (e) {
+            e.preventDefault();
+            var f = $(this);
+            $.post(f.attr("action"), f.serialize(), function (res) {
+                if (res.Status === "success") {
+                    alert(res.Message);
+                    window.location.href = "/topic/mytopic";
+                }
+            });
+        });
+
+    });
+</script>

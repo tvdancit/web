@@ -37,7 +37,7 @@ namespace DataContext.DataTable
         public string IdP { get; set; }
 
         [Column(TypeName = "date")]
-        public DateTime? DateSt { get; set; }
+        public DateTime DateSt { get; set; }
 
         public int? Times { get; set; }
 

@@ -21,6 +21,9 @@ namespace DataContext.DataTable
         [Column(TypeName = "ntext")]
         public string Status { get; set; }
 
+        [Column(TypeName = "ntext")]
+        public string FileName { get; set; }
+
         public virtual TopicOfLecture TopicOfLecture { get; set; }
     }
 }

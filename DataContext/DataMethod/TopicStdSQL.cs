@@ -19,26 +19,26 @@ namespace DataContext.DataMethod
         }
         public int getLastTopicStd(string idp)
         {
-            var get = connect.TopicOfStudents.Where(x=>x.IdP==idp).OrderByDescending(x => x.IdTp).FirstOrDefault();
-           if(get == null)
+            var get = connect.TopicOfStudents.Where(x => x.IdP == idp).OrderByDescending(x => x.IdTp).FirstOrDefault();
+            if (get == null)
             {
                 int id;
                 return id = 1;
             }
-           else
+            else
             {
-                string [] str = get.IdP.Split('-');
-                int id = (int.Parse(str[str.Length-1]))+1;
+                string[] str = get.IdP.Split('-');
+                int id = (int.Parse(str[str.Length - 1])) + 1;
                 return id;
             }
         }
-        public bool AddTopicStd( TopicSt st,string id)
+        public bool AddTopicStd(TopicSt st, string id)
         {
 
             string input = st.DateSt.ToShortDateString();
-            string [] arr = input.Split('/');
+            string[] arr = input.Split('/');
             Array.Reverse(arr);
-            string date = string.Join("/",arr);
+            string date = string.Join("/", arr);
             TopicOfStudent student = new TopicOfStudent();
             student.IdTp = id;
             student.Name = st.Name;
@@ -48,7 +48,7 @@ namespace DataContext.DataMethod
             student.IdSV = st.IdSV;
             student.IdP = st.IdP;
             student.Email = st.Email;
-            student.DateSt = (DateTime)DateTime.ParseExact(date,"yyyy/MM/dd",null);
+            student.DateSt = (DateTime)DateTime.ParseExact(date, "yyyy/MM/dd", null);
             student.Times = st.Times;
             try
             {
@@ -56,12 +56,12 @@ namespace DataContext.DataMethod
                 connect.SaveChanges();
                 return true;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e.Message);
                 return false;
             }
-            
+
         }
     }
 }

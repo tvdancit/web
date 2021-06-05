@@ -86,6 +86,7 @@
     <Compile Include="ViewModel\InfomationViewModel.cs" />
     <Compile Include="ViewModel\TopicLecuter.cs" />
     <Compile Include="ViewModel\TopicLeModel.cs" />
+    <Compile Include="ViewModel\TopicmdLe.cs" />
     <Compile Include="ViewModel\TopicSt.cs" />
   </ItemGroup>
   <ItemGroup>
