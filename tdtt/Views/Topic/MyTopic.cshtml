@@ -5,101 +5,148 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>MyTopic</h2>
+<div style="margin:1px 1px 1px 1px; border:1px solid blue;">
+    @using (Html.BeginForm())
+    {
+        <div class="form-group" style="margin-top:10px">
+            <label style="width:80px"> Từ ngày</label>
+            <input type="date" value="01/01/2001" />
+            <label style="width:80px;margin-left:60px">Đến ngày</label>
+            <input type="date" value="@DateTime.Now" />
+        </div>
+        <hr />
+        <div class="form-group">
+            <label style="width:80px"> Lĩnh Vực</label>
+            <select style="width:auto">
+                <option value>Chọn Lĩnh Vực</option>
+                @foreach (var item in (List<DataContext.DataTable.Type>)ViewBag.Type)
+                {
+                    <option value="@item.IdTy">@item.Name</option>
+                }
+            </select>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr style=" font-size:small">
-        <th>
-           Mẫ Nhiệm Vụ
-        </th>
-        <th>
-          Tên Nhiện VỤ
-        </th>
-        <th>
-           Thể Loại
-        </th>
-        <th>
-           Ngày Thực Hiện
-        </th>
-        <th>
-           Thời Gian
-        </th>
-        <th>
-           Chi Phí
-        </th>
-        <th>
-            Trạng Thái
-        </th>
-        <th>
-           Kết Quả
-        </th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-<tr>
-    <td>
-        @item.IdTp
-    </td>
-    <td>
-        <a href="/de-tai/@item.IdTp"> @item.Name</a>
-       
-    </td>
-    <td>
-        @item.NameP
-    </td>
-    <td>
-        @item.DateSt.ToShortDateString()
-    </td>
-    <td>
-        @item.Times
-    </td>
-    <td>
-        @string.Format("{0:#,0}", item.Expense)
-    </td>
-    @if (item.Status == 2)
-    {
-        <td>
-            Chưa Duyệt
-        </td>
-    }
-    else if (item.Status == 1)
-    {
-        <td>
-            Đã Duyệt
-        </td>
-    }
-    else if (item.Status
-        == 0)
-    {
-        <td>
-            Bị Hủy
-        </td>
-    }
-    else
-    {
-        <td>
-            !!!!!!
-        </td>
-    }
-    @if (item.Process != null)
-    {
-        <td>
-            @item.Process
-        </td>
-    }
-    else
-    {
-        <td> </td>
+            <label style="width: 125px; margin-left: 60px; margin-bottom:10px"> Loại Nhiệm Vụ</label>
+            <select>
+                <option value>Chọn Nhiệm Vụ</option>
+                @foreach (var item in (List<DataContext.DataTable.PointTable>)ViewBag.Point)
+                {
+                    <option value="@item.IdP">@item.NameP</option>
+                }
+            </select>
+        </div>
+        <hr />
+        <div class=" form-group" style="margin-bottom:10px">
+            <input type="submit" value="Lọc" class="btn btn-facebook" style="width:150px;margin-left:60%" />
+        </div>
     }
 
-    <td>
-        @Html.ActionLink("Chi tiết", "Details", new { id = item.IdTp }) 
-    </td>
-</tr>
-    }
+</div>
 
-</table>
+<hr />
+<small>
+    <table class="table" id="tbtopic">
+        <tr style=" font-size:small">
+            <th>
+            </th>
+            <th>
+                Tên Nhiện Vụ
+            </th>
+            <th>
+                Thể Loại
+            </th>
+            <th>
+                Ngày Thực Hiện
+            </th>
+            <th>
+                Thời Gian
+            </th>
+            <th>
+                Chi Phí
+            </th>
+            <th>
+                Trạng Thái
+            </th>
+            <th>
+                Kết Quả
+            </th>
+            <th> <button onclick="ExportToExcel(tbtopic)">>>> Excel</button></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.IdTp
+                </td>
+                <td>
+                    <a href="/de-tai/@item.IdTp"> @item.Name</a>
+
+                </td>
+                <td>
+                    @item.NameP
+                </td>
+                <td>
+                    @item.DateSt.ToShortDateString()
+                </td>
+                <td>
+                    @item.Times <small>(Tháng)</small>
+                </td>
+                <td>
+                    @string.Format("{0:#,0}", item.Expense)
+                </td>
+                @if (item.Status == 2)
+                {
+                    <td>
+                        Chưa Duyệt
+                    </td>
+                }
+                else if (item.Status == 1)
+                {
+                    <td>
+                        Đã Duyệt
+                    </td>
+                }
+                else if (item.Status
+                    == 0)
+                {
+                    <td>
+                        Bị Hủy
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        !!!!!!
+                    </td>
+                }
+                @if (item.Process != null)
+                {
+                    <td>
+                        @item.Process
+                    </td>
+                }
+                else
+                {
+                    <td> </td>
+                }
+
+                <td>
+                    <a href="@Url.Action("createprog","topic",new { id= item.IdTp})">Cập Nhật</a>
+                </td>
+            </tr>
+        }
+
+    </table>
+</small>
+
+<script type="text/javascript">
+    function ExportToExcel(tblId) {
+        var htmltable = document.getElementById(tblId);
+        var html = htmltable.outerHTML;
+        window.open('data:application/vnd.ms-excel,' + encodeURIComponent(html));
+    }
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+    })
+</script>

@@ -1,0 +1,56 @@
+﻿@model DataContext.DataTable.ProgressLe
+
+@{
+    ViewBag.Title = "CreateProg";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>CreateProg</h2>
+
+@using (Html.BeginForm("CreateProg","topic",FormMethod.Post, new { enctype ="multipart/form-data"}))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>ProgressLe</h4>
+        <hr />
+
+        <div class="form-group">
+            <label class="control-label col-md-2"> Ngày thực hiện </label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+                @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2"> Quá trình </label>
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Status,null, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2"> File </label>
+            <div class="col-md-10">
+               <input  class="form-control" type="file" id="fileName" name="fileName"/>
+                @Html.ValidationMessageFor(model => model.FileName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Mytopic")
+</div>
+<script type="text/javascript">
+        document.getElementById("Date").valueAsDate = new Date();
+    var date = moment().fomat('YYYY-MM-DD');
+    document.getElementById("DateSt").value = date;</script>

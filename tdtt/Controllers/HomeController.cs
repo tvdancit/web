@@ -46,6 +46,8 @@ namespace tdtt.Controllers
             return File(FileVirtualPath, "application/force-download", Path.GetFileName(FileVirtualPath));
         }
         #endregion
+        // đăng ký đe tai cho sinh vien
+        #region
         public ActionResult CreateTopicStd(string id)
         {
             ViewBag.Type = new PointSQL().GetTypes();
@@ -68,7 +70,7 @@ namespace tdtt.Controllers
             }
             return RedirectToAction("CreateTopicStd");
         }
-
+        #endregion
     }
 
 

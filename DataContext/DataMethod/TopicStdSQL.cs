@@ -1,4 +1,5 @@
-﻿using DataContext.DataTable;
+﻿
+using DataContext.DataTable;
 using DataContext.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -34,11 +35,11 @@ namespace DataContext.DataMethod
         }
         public bool AddTopicStd(TopicSt st, string id)
         {
-
-            string input = st.DateSt.ToShortDateString();
-            string[] arr = input.Split('/');
+            string resu = st.DateSt.ToShortDateString();
+            string[] arr = resu.Split('/');
             Array.Reverse(arr);
-            string date = string.Join("/", arr);
+            string res = string.Join("/", arr);
+            // 
             TopicOfStudent student = new TopicOfStudent();
             student.IdTp = id;
             student.Name = st.Name;
@@ -48,7 +49,7 @@ namespace DataContext.DataMethod
             student.IdSV = st.IdSV;
             student.IdP = st.IdP;
             student.Email = st.Email;
-            student.DateSt = (DateTime)DateTime.ParseExact(date, "yyyy/MM/dd", null);
+            student.DateSt = (DateTime)DateTime.ParseExact(res, "yyyy/MM/dd", null);
             student.Times = st.Times;
             try
             {

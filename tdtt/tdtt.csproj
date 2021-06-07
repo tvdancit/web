@@ -143,6 +143,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Img\Method\exportTo.cs" />
     <Compile Include="Models\Account\AccountModel.cs" />
     <Compile Include="Models\Account\ChangePasswordModel.cs" />
     <Compile Include="Models\Login\LoginModel.cs" />
@@ -231,6 +232,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
+    <Content Include="Scripts\js\date.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -245,7 +247,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="FileFolder\Bang-diem\" />
     <Folder Include="FileFolder\Bao-cao\" />
-    <Folder Include="FileFolder\De-tai\" />
+    <Folder Include="FileFolder\De-tai\12131\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="FileFolder\Thong-bao\Website-Quan-ly-KHCN-ĐHTDTT-DN.docx" />
@@ -267,7 +269,7 @@
     <Content Include="Content\Bootstrap5\bootstrap-grid.css.map" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Shared\_leftPage.cshtml" />
+    <Content Include="Views\Shared\_LectLeft.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Notification.cshtml" />
     <Content Include="Views\Home\DetailNo.cshtml" />
@@ -288,9 +290,14 @@
     <Content Include="Scripts\bootstrap.bundle.min.js.map" />
     <Content Include="Scripts\bootstrap.bundle.js.map" />
     <Content Include="Views\User\Index.cshtml" />
-    <Content Include="Views\Topic\Details.cshtml" />
     <Content Include="Views\Topic\Edit.cshtml" />
     <Content Include="Views\Topic\SignUpTopic.cshtml" />
+    <Content Include="Views\Topic\Details.cshtml" />
+    <Content Include="Views\Topic\CreateProg.cshtml" />
+    <Content Include="Views\Topic\partialViewFile.cshtml" />
+    <Content Include="Views\Shared\_adminLeft.cshtml" />
+    <Content Include="Views\Shared\_mgnLeft.cshtml" />
+    <Content Include="Views\Shared\_generalLeft.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataContext\DataContext.csproj">

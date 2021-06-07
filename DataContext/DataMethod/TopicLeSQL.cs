@@ -43,6 +43,8 @@ namespace DataContext.DataMethod
         //get list by idle
         public List<TopicLecuter> GetTopicOfLectures(string id)
         {
+
+
             var linq = from t in connect.TopicOfLectures
                        join p in connect.PointTables on t.IdP equals p.IdP
                        where t.IdLe == id
@@ -61,6 +63,10 @@ namespace DataContext.DataMethod
             linq.OrderByDescending(x => x.DateSt);
             return linq.ToList();
 
+
+
+
+
         }
         //find by id of idle
         public detailTopic findTopic(string id)
@@ -74,8 +80,8 @@ namespace DataContext.DataMethod
                            IdTp = t.IdTp,
                            Name = t.Name,
                            name = p.NameP,
-                           Target= t.Target,
-                           Content= t.Content,
+                           Target = t.Target,
+                           Content = t.Content,
                            DateSt = t.DateSt,
                            Status = t.Status,
                            Expense = t.Expense,
@@ -88,7 +94,7 @@ namespace DataContext.DataMethod
         // get qua trinh thực hien by id
         public List<ProgressLe> getProcessbyId(string id)
         {
-            return connect.ProgressLes.Where(x => x.IdTp == id).ToList();
+            return connect.ProgressLes.Where(x => x.IdTp == id).OrderByDescending(x=>x.Date).ToList();
         }
         // get tp
         public TopicOfLecture getTopic(string id)
@@ -98,7 +104,7 @@ namespace DataContext.DataMethod
         // get last id by idp
         public int getLastId(string idp)
         {
-            var get=connect.TopicOfLectures.Where(x => x.IdP == idp).OrderByDescending(y => y.IdTp).FirstOrDefault();
+            var get = connect.TopicOfLectures.Where(x => x.IdP == idp).OrderByDescending(y => y.IdTp).FirstOrDefault();
             if (get == null)
             {
                 int id;
@@ -136,6 +142,18 @@ namespace DataContext.DataMethod
 
             }
             catch (Exception e)
+            {
+                return false;
+            }
+        }
+        public bool UpProg(ProgressLe progress)
+        {
+            try {
+                connect.ProgressLes.Add(progress);
+                connect.SaveChanges();
+                return true;
+            }
+            catch(Exception e)
             {
                 return false;
             }

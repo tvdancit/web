@@ -1,4 +1,15 @@
-﻿
+﻿@{ 
+    int access = -1;
+    if (Session["type"] == null)
+    {
+        access = -1;
+    }
+    else
+    {
+        access = (int)Session["type"];
+    }
+
+}
 
 
 
@@ -56,7 +67,26 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        @RenderPage("_leftPage.cshtml")
+        @if (2 == access)
+        {
+            @Html.Partial("_LectLeft");
+        }
+        else if (1 == access)
+        {
+
+        }
+        else if (0 == access)
+        { }
+        else if (-1 == access)
+        {
+            @Html.Partial("_generalLeft");
+        }
+        else
+
+        {
+
+        }
+
 
 
         <!-- End of Sidebar -->

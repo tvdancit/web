@@ -16,7 +16,7 @@ namespace DataContext.DataTable
         public string IdTp { get; set; }
 
         [Column(TypeName = "date")]
-        public DateTime? Date { get; set; }
+        public DateTime Date { get; set; }
 
         [Column(TypeName = "ntext")]
         public string Status { get; set; }

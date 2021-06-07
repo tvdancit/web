@@ -30,6 +30,7 @@ namespace tdtt.Controllers
                     var userSess = new LoginSession();
                     userSess.UserName = ses.UserName;
                     userSess.Type = ses.Access;
+                    Session["type"] = ses.Access;
                     Session.Add(StaticSession.USER, userSess);
                     Session.Timeout = 30;
                     if (userSess.Type == 0)
@@ -42,7 +43,7 @@ namespace tdtt.Controllers
                     }
                     else if (userSess.Type == 2)
                     {
-                        return RedirectToAction("Index", "Admin");
+                        return RedirectToAction("Mytopic", "topic");
                     }
                     else
                     {
