@@ -72,6 +72,7 @@
     <Compile Include="DataTable\Department.cs" />
     <Compile Include="DataTable\DetailNotifi.cs" />
     <Compile Include="DataTable\DetailStatementLe.cs" />
+    <Compile Include="DataTable\FileData.cs" />
     <Compile Include="DataTable\Information.cs" />
     <Compile Include="DataTable\Notification.cs" />
     <Compile Include="DataTable\PointTable.cs" />
@@ -82,8 +83,10 @@
     <Compile Include="DataTable\TopicOfStudent.cs" />
     <Compile Include="DataTable\Type.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\DataPoint.cs" />
     <Compile Include="ViewModel\detailTopic.cs" />
     <Compile Include="ViewModel\InfomationViewModel.cs" />
+    <Compile Include="ViewModel\StatementModel.cs" />
     <Compile Include="ViewModel\TopicLecuter.cs" />
     <Compile Include="ViewModel\TopicLeModel.cs" />
     <Compile Include="ViewModel\TopicmdLe.cs" />

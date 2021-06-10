@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <div class="card shadow mb-4">
     <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">Danh Sách Tài Khoản</h6>
@@ -30,63 +30,77 @@
 
                     }
 
-                    <div class="col-sm-12">
-                        <table class="table table-bordered dataTable" id="dataTable" width="96%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
-                            <thead>
-                                <tr role="row">
-                                    <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 100px;">#</th>
-                                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 246px;">Tên Tài Khoản</th>
-                                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 114px;">Quyền</th>
-                                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 51px;">Trạng Thái</th>
-                                </tr>
-                            </thead>
-                            <tfoot>
-                                <tr>
-                                    <th rowspan="1" colspan="1">#</th>
-                                    <th rowspan="1" colspan="1">Tên Tài Khoản</th>
-                                    <th rowspan="1" colspan="1">Quyền</th>
-                                    <th rowspan="1" colspan="1">Trạng Thái</th>
+                <div class="col-sm-12">
+                    <button class="btn-block" style="width:150px;background-color:none;border:none">Thêm Tài Khoản</button>
+                    <div class="modal fade" id="myModal1" role="dialog" data-url="/admin/Create"></div>
+                    <table class="table table-bordered dataTable" id="dataTable" width="96%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+                        <thead>
+                            <tr role="row">
+                                <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 100px;">#</th>
+                                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 246px;">Tên Tài Khoản</th>
+                                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 114px;">Quyền</th>
+                                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 51px;">Trạng Thái</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th rowspan="1" colspan="1">
+
+                                </th>
+                                <th rowspan="1" colspan="1">Tên Tài Khoản</th>
+                                <th rowspan="1" colspan="1">Quyền</th>
+                                <th rowspan="1" colspan="1">Trạng Thái</th>
+
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr id="row-@item.UserName">
+                                    <td>
+
+                                        <a href="@Url.Action("Edit","admin", new { id= item.UserName})">Edit</a>
+                                        <!-- -->
+                                        @Ajax.ActionLink("Delete", "delete", new { @id = item.UserName }, new AjaxOptions
+                                   {
+                                       Confirm = "Xóa Tài Khoản Nay?",
+                                       OnComplete = "$('#row-" + @item.UserName + "').remove()",
+                                       HttpMethod = "Delete"
+
+                                   })
+
+
+                                    </td>
+
+                                    <td>@item.UserName</td>
+                                    @if (item.Access == 0)
+                                    {
+                                        <td>Admin</td>
+                                    }
+                                    else if (item.Access == 1)
+                                    {
+                                        <td>Phòng Quản Lý</td>
+                                    }
+                                    else
+                                    {
+                                        <td>Người Dùng</td>
+                                    }
+                                    @if (item.Status == "0")
+                                    {
+                                        <td>Đang Sử Dụng</td>
+
+                                    }
+                                    else
+                                    {
+                                        <td>Đã Khóa</td>
+                                    }
+
 
                                 </tr>
-                            </tfoot>
-                            <tbody>
-                                @foreach (var item in Model)
-                                {
-                                    <tr>
-                                        <td>
-                                            <a href="/Admin/FormEdit/@item.UserName">Sửa</a><br />
-
-                                        </td>
-
-                                        <td>@item.UserName</td>
-                                        @if (item.Access == 0)
-                                        {
-                                            <td>Admin</td>
-                                        }
-                                        else if (item.Access == 1)
-                                        {
-                                            <td>Phòng Quản Lý</td>
-                                        }
-                                        else
-                                        {
-                                            <td>Người Dùng</td>
-                                        }
-                                        @if (item.Status == "0")
-                                        {
-                                            <td>Đang Sử Dụng</td>
-
-                                        }
-                                        else
-                                        {
-                                            <td>Đã Khóa</td>
-                                        }
-
-
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                    </div>
+                            }
+                        </tbody>
+                    </table>
+                </div>
                 </div>
                 @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page, @seach = @ViewBag.seaching }))
 
@@ -94,4 +108,32 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.btn-block').click(function () {
+
+            var url = $('#myModal1').data('url');
+            $.get(url, function (data) {
+                $("#myModal1").html(data);
+                $("#myModal1").modal('show');
+            });
+        })
+    });
+
+    $(document).ready(function () {
+        $('.btn-primary').click(function () {
+
+            var url = $('#myModal').data('url');
+            console.log(url);
+            $.get(url, function (data) {
+                $("#myModal").html(data);
+                $("#myModal").modal('show');
+            });
+        })
+    });
+
+
+
+</script>
 

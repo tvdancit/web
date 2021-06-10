@@ -13,14 +13,12 @@
 
 }
 
-<h2>SignUpTopic</h2>
-
 @using (Html.BeginForm("SignUp", "topic", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal" style="align-items:center">
-        <h4>TopicmdLe</h4>
+        <h4>Đăng Ký Đề tài</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -98,7 +96,7 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
-<script>
+<script type="text/javascript">
     $(function () {
 
         $("form").submit(function (e) {
@@ -113,4 +111,10 @@
         });
 
     });
+   
+</script>
+<script type="text/javascript">
+    document.getElementById("DateSt").valueAsDate = new Date();
+    var date = moment().fomat('YYYY-MM-DD');
+    document.getElementById("DateSt").value = date;
 </script>

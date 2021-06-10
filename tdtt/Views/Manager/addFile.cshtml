@@ -1,0 +1,76 @@
+﻿@model DataContext.DataTable.FileData
+@{
+    Layout = null;
+}
+<div class="modal-dialog" style="width:1000px;">
+    <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+            <h4 class="modal-title">Cập nhật Quy chế tính điểm cho năm học mới</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body" style=" width:600px;height:400px;align-items:flex-start;">
+            @using (Html.BeginForm("addFile","manager",FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">          
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Bắt Đầu Từ</label>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.sincedate, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+                            @Html.ValidationMessageFor(model => model.sincedate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Đến Ngày</label>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.todate, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+                            @Html.ValidationMessageFor(model => model.todate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2">File</label>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.FileName, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
+                            @Html.ValidationMessageFor(model => model.FileName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Create" class="btn btn-default" />
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <!-- Modal footer -->
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+
+    </div>
+
+</div>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+<script type="text/javascript">
+    document.getElementById("sincedate").valueAsDate = new Date();
+    var date = moment().fomat('YYYY-MM-DD');
+    document.getElementById("sincedate").value = date;
+</script>
+<script type="text/javascript">
+    document.getElementById("todate").valueAsDate = new Date();
+    var date = moment().fomat('YYYY-MM-DD');
+    document.getElementById("todate").value = date;
+</script>

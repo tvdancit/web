@@ -1,0 +1,38 @@
+﻿@model DataContext.DataTable.DetailStatementLe
+@{
+    var topic = (List<DataContext.DataTable.TopicOfLecture>)ViewBag.Topic;
+    var status = ViewBag.Status;
+}
+
+@using (Html.BeginForm("addTopic","Manager",FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-md-2"> Tên Đề Tài</label>
+            <div class="col-md-10">
+                @Html.DropDownList("IdTp", new SelectList(ViewBag.Topic,"Idtp","Name"),"Chọn đề tài")
+                
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Lần Báo cáo</label>
+            <div class="col-md-10">
+               @Html.DropDownList("Status",new SelectList(ViewBag.Status,"Value","Text"),"Chọn lần cáo báo")
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

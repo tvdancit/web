@@ -1,4 +1,5 @@
 ﻿using DataContext.DataTable;
+using DataContext.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,9 +19,24 @@ namespace DataContext.DataMethod
         {
             return connect.Statements.OrderByDescending(x => x.DateRp).ToList();
         }
-        public List<DetailStatementLe> GetDetailsById(long id)
+        public Statement GetStatementsId(long id)
         {
-            return connect.DetailStatementLes.Where(m => m.IdSt == id).ToList();
+            return connect.Statements.Where(x=>x.IdSt==id).SingleOrDefault();
+        }
+        public List<StatementModel> GetDetailsById(long id)
+        {
+            var linq = from dt in connect.DetailStatementLes
+                       where dt.IdSt == id
+                       join tp in connect.TopicOfLectures on dt.IdTp equals tp.IdTp
+                       join le in connect.Information on tp.IdLe equals le.IdLe 
+                       select new StatementModel
+                       {
+                           IdDtST= dt.IdDtST,
+                           Name = tp.Name,
+                           NameLe = le.Name,
+                           Status = dt.Status
+                       };
+            return linq.ToList();
         }
     }
 }

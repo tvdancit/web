@@ -17,6 +17,7 @@ namespace DataContext.DataTable
         public virtual DbSet<Department> Departments { get; set; }
         public virtual DbSet<DetailNotifi> DetailNotifis { get; set; }
         public virtual DbSet<DetailStatementLe> DetailStatementLes { get; set; }
+        public virtual DbSet<FileData> FileDatas { get; set; }
         public virtual DbSet<Information> Information { get; set; }
         public virtual DbSet<Notification> Notifications { get; set; }
         public virtual DbSet<PointTable> PointTables { get; set; }

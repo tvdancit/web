@@ -1,0 +1,28 @@
+﻿@model List<tdtt.Models.File.FileIO>
+@using tdtt.Models.File 
+
+@{
+    ViewBag.Title = "ViewFile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="table">
+    <tr>
+        <th>
+           File
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @item.FileName
+        </td>
+        <td>         
+            @Html.ActionLink("Delete", "Delete", new { fileName = item.FileName})
+        </td>
+    </tr>
+}
+
+</table>

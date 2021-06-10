@@ -17,7 +17,6 @@ namespace DataContext.DataTable
         [StringLength(10)]
         public string IdTp { get; set; }
 
-        public int? Times { get; set; }
 
         [Column(TypeName = "ntext")]
         public string Status { get; set; }

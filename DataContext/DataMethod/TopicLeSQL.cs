@@ -158,6 +158,10 @@ namespace DataContext.DataMethod
                 return false;
             }
         }
+        public List<TopicOfLecture> getList ()
+        {
+            return connect.TopicOfLectures.Where(x => x.Status == 1).ToList();
+        }
     }
 
 }

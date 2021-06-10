@@ -1,0 +1,14 @@
+﻿@model List< DataContext.DataTable.Statement>
+
+@{
+    ViewBag.Title = "Statement";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h5> Lịch báo cáo đề tài</h5>
+@foreach(var item in Model)
+            {
+                <li><a href="/home/DetailStatement/@item.IdSt" date="@item.DateRp.ToShortDateString()">Lịch báo cáo đề tài ngay @item.DateRp.ToShortDateString()</a></li>
+            }
+
+

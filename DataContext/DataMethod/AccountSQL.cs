@@ -166,6 +166,35 @@ namespace DataContext.DataMethod
 
             return false;
         }
+        // xoa tk
+        public bool delete(string user)
+        {
+            var res = connect.Information.Where(x => x.UserName == user).FirstOrDefault();
+            if (res != null)
+                return false;
+            else
+            {
+                try
+                {
+                    var use = connect.Accounts.Find(user);
+                    connect.Accounts.Remove(use);
+                    connect.SaveChanges();
+                    return true;
+                }
+                catch(Exception e)
+                {
+                    return false;
+                }
+            }
+        }
+        // reset pass
+        public void reset(string use)
+        {
+            var acc = connect.Accounts.Find(use);
+            acc.PassWord = HashMD5.MD5Hash("dhtdtt");
+            connect.SaveChanges();
+
+        }
     }
 
 

@@ -20,6 +20,12 @@ namespace tdtt
             url: "de-tai/{id}",
             defaults: new { controller = "Topic", action = "Details", id = UrlParameter.Optional }
           );
+           
+            routes.MapRoute(
+            name: "Bang diem",
+            url: "bang-diem",
+            defaults: new { controller = "Home", action = "DataPoint", id = UrlParameter.Optional }
+          );
             routes.MapRoute(
              name: "Detail",
              url: "thong-bao/{MetaTitle}-{id}",

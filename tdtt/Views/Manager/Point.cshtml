@@ -1,0 +1,157 @@
+﻿@model IEnumerable<DataContext.ViewModel.DataPoint>
+
+@{
+    ViewBag.Title = "Point";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var type = (List<DataContext.DataTable.Type>)ViewBag.Type;
+    var file = (List<DataContext.DataTable.FileData>)ViewBag.file;
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<div id="content">
+    <ul id="tabs" class="nav nav-tabs" data-tabbs="tabs">
+        <li class="active" style="width:100px">
+            <a href="#tab1" data-toggle="tab">Nhiệm Vụ</a>
+        </li>
+        <li style="width:100px">
+            <a href="#tab2" data-toggle="tab">Lĩnh Vực</a>
+        </li>
+        <li style="width:200px">
+            <a href="#tab3" data-toggle="tab">Quy chế tính điểm theo năm</a>
+        </li>
+    </ul>
+    <div id="" class="tab-content">
+
+        <div class="tab-pane active" id="tab1">
+            <div>
+                <button class="btn-block" style="width:150px;background-color:Highlight">Thêm Nhiệm Vụ</button>
+                <div class="modal fade" id="myModal" role="dialog" data-url="/manager/Create"></div>
+            </div>
+            <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info">
+                <thead>
+                    <tr>
+                        <th>Mẫ Nhiệm Vụ</th>
+                        <th>Lĩnh Vực</th>
+                        <th>Loại Nhiệm Vụ</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IdP)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.NameP)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="tab-pane" id="tab2">
+            <div>
+                <button class="btn btn-facebook">Thêm Lĩnh Vực</button>
+                <div class="modal fade" id="myModal1" role="dialog" data-url="/manager/CreateType"></div>
+            </div>
+            <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+                <thead>
+                    <tr role="row">
+                        <th>Mã Lĩnh Vực</th>
+                        <th>Lĩnh Vực</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in type)
+                    {
+                        <tr>
+                            <td>@item.IdTy</td>
+                            <td>@item.Name</td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="tab-pane" id="tab3">
+            <div>
+                <button class="btn-google" ><small>Thêm Quy chế cho năm học mới</small></button>
+                <div class="modal fade" id="myModal2" role="dialog" data-url="/Manager/addFile"></div>
+            </div>
+            <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+                <thead>
+                    <tr role="row">
+                        <th>STT</th>
+                        <th>Mã Lĩnh Vực</th>
+                        <th>Lĩnh Vực</th>
+                        <th>File</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in file)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.sincedate.ToShortDateString()</td>
+                            <td>@item.todate.ToShortDateString()</td>
+                            <td>@item.FileName</td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.btn-block').click(function () {
+            var url = $('#myModal').data('url');
+            $.get(url, function (data) {
+                $("#myModal").html(data);
+                $("#myModal").modal('show');
+            });
+        })
+    });
+    $(document).ready(function () {
+        $('.btn-facebook').click(function () {
+            var url = $('#myModal1').data('url');
+            $.get(url, function (data) {
+                $("#myModal1").html(data);
+                $("#myModal1").modal('show');
+            });
+        })
+    });
+    $(document).ready(function () {
+        $('.btn-google').click(function () {
+            var url = $('#myModal2').data('url');
+            $.get(url, function (data) {
+                $("#myModal2").html(data);
+                $("#myModal2").modal('show');
+            });
+        })
+    });
+   
+    
+</script>

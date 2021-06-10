@@ -138,6 +138,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\ManagerController.cs" />
     <Compile Include="Controllers\TopicController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
@@ -146,6 +147,7 @@
     <Compile Include="Img\Method\exportTo.cs" />
     <Compile Include="Models\Account\AccountModel.cs" />
     <Compile Include="Models\Account\ChangePasswordModel.cs" />
+    <Compile Include="Models\File\FileIO.cs" />
     <Compile Include="Models\Login\LoginModel.cs" />
     <Compile Include="Models\Login\LoginSession.cs" />
     <Compile Include="Models\Login\StaticSession.cs" />
@@ -221,6 +223,7 @@
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="favicon.ico" />
+    <Content Include="FileFolder\Bang-diem\chinhtri.txt" />
     <Content Include="Global.asax" />
     <Content Include="Img\images.png" />
     <Content Include="Scripts\ajaxreset.js" />
@@ -232,6 +235,13 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\js\date.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -242,10 +252,21 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Home\DataPoint.cshtml" />
+    <Content Include="Views\Manager\Point.cshtml" />
+    <Content Include="Views\Manager\Create.cshtml" />
+    <Content Include="Views\Manager\CreateType.cshtml" />
+    <Content Include="Views\Manager\addFile.cshtml" />
+    <Content Include="Views\Manager\ViewFile.cshtml" />
+    <Content Include="Views\Home\Statement.cshtml" />
+    <Content Include="Views\Home\DetailStatement.cshtml" />
+    <Content Include="Views\Manager\Statement.cshtml" />
+    <Content Include="Views\Manager\CreateStatement.cshtml" />
+    <Content Include="Views\Manager\addTopic.cshtml" />
+    <Content Include="Views\Manager\CreateNotifi.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="FileFolder\Bang-diem\" />
     <Folder Include="FileFolder\Bao-cao\" />
     <Folder Include="FileFolder\De-tai\12131\" />
   </ItemGroup>
@@ -278,7 +299,6 @@
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Account\FormChange.cshtml" />
     <Content Include="Views\Account\UpdateInfo.cshtml" />
-    <Content Include="Views\Admin\FormEdit.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Account\Check.cshtml" />
     <Content Include="Views\Topic\MyTopic.cshtml" />
@@ -298,6 +318,8 @@
     <Content Include="Views\Shared\_adminLeft.cshtml" />
     <Content Include="Views\Shared\_mgnLeft.cshtml" />
     <Content Include="Views\Shared\_generalLeft.cshtml" />
+    <Content Include="Views\Admin\Edit.cshtml" />
+    <Content Include="Views\Admin\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataContext\DataContext.csproj">

@@ -1,0 +1,53 @@
+﻿@model IEnumerable<DataContext.DataTable.Statement>
+
+@{
+    ViewBag.Title = "Statement";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Lịch Báo cáo</h2>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<p>
+    <div>
+        <button class="btn btn-facebook" style="width:150px;background-color:Highlight">tạo lịch báo cáo</button>
+        <div class="modal fade" id="myModal" role="dialog" data-url="/manager/CreateStatement"></div>
+    </div>
+</p>
+<table class="table">
+    <tr>
+        <th>STT</th>
+        <th>
+            Ngày báo cáo
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td></td>
+            <td>
+                @item.DateRp.ToShortDateString()
+            </td>
+            <td>
+                <small>
+                    @Html.ActionLink("thêm đề tài", "addTopic", new { id = item.IdSt }) |
+                    @Html.ActionLink("chi tiết", "Details", new { id = item.IdSt }) |
+                    @Html.ActionLink("xóa", "Delete", new { id = item.IdSt })
+                </small>
+            </td>
+        </tr>
+    }
+
+</table>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.btn-facebook').click(function () {
+            var url = $('#myModal').data('url');
+            $.get(url, function (data) {
+                $("#myModal").html(data);
+                $("#myModal").modal('show');
+            });
+        })
+    });
+</script>

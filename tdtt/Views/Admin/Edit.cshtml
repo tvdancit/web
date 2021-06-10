@@ -1,4 +1,5 @@
-﻿@model DataContext.DataTable.Account
+﻿
+@model DataContext.DataTable.Account
 
 @{
     ViewBag.Title = "FormEdit";
@@ -48,18 +49,19 @@
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
                             <input type="submit" value="Lưu" class="btn btn-facebook" />
-                            @Ajax.ActionLink("Reset Mật Khẩu", "Reset", new AjaxOptions()
-                       {
-                           Confirm = "Reset Mật Khâu Tài Khoản: " + user,
-                           HttpMethod="Reset",
-                       })
+
+
                         </div>
 
                     </div>
 
+
                 </div>
             }
+          
 
+       
+            @Html.ActionLink("Reset Pass","reset","Admin",new { id = Model.UserName },new{ @onclick="confirm('Reset Mật Khẩu')"})
         </div>
     </div>
 
@@ -68,4 +70,3 @@
 <div>
     <a href="@Url.Action("Index","Admin")"><< Quay lại danh sách</a>
 </div>
-

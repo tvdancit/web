@@ -1,0 +1,40 @@
+﻿@model IEnumerable<DataContext.ViewModel.StatementModel>
+
+@{
+    ViewBag.Title = "DetailStatement";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2> Lịch Báo cáo tiến độ đề tài ngày @ViewBag.date</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            Tên đề tài
+        </th>
+        <th>
+           Tên Giảng Viên
+        </th>
+        <th>
+          Lần báo cáo
+        </th>
+       
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NameLe)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+       
+    </tr>
+}
+
+</table>

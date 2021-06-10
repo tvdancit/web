@@ -27,9 +27,7 @@ namespace DataContext.DataTable
         public string NameP { get; set; }
 
         [Column(TypeName = "ntext")]
-        public string File { get; set; }
 
-        public virtual Type Type { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TopicOfLecture> TopicOfLectures { get; set; }

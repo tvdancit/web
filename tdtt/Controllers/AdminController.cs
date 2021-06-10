@@ -13,25 +13,33 @@ namespace tdtt.Controllers
     public class AdminController : BaseController
     {
         // GET: Admin
-
+        AccountSQL sql = new AccountSQL();
         // show tat ca tai khoan
         public ActionResult Index(string seach, int page = 1, int pagesize = 30)
         {
-            var model = new AccountSQL().getListAcc(seach, page, pagesize);
+            var model = sql.getListAcc(seach, page, pagesize);
             ViewBag.seaching = seach;
             return View(model);
         }
         // them tai khoan- ham insert
+
         public ActionResult FormInsert()
         {
             Setlist();
             return View();
         }
+        [HttpGet]
+        public ActionResult Create()
+        {
+            Setlist();
+            return View();
+        }
+        [HttpPost]
         public ActionResult Create(AccountModel model)
         {
             if (ModelState.IsValid)
             {
-                var res = new AccountSQL();
+                var res = sql;
                 if (res.FindByUser(model.Username) == false)
                 {
                     res.InsertAcc(model.Username, HashMD5.MD5Hash(model.Password), model.Access);
@@ -45,20 +53,21 @@ namespace tdtt.Controllers
         }
         // edit tai khoan
         #region
-        public ActionResult FormEdit(string id)
+
+        public ActionResult Edit(string id)
         {
             Setlist();
-            var model = new AccountSQL().DetailbyUser(id);
+            var model = sql.DetailbyUser(id);
             ViewBag.User = id;
             return View(model);
         }
         public ActionResult Update(AccountModel model)
         {
-            var update = new AccountSQL().UpdateAccount(model.Username, model.Access, model.Status);
+            var update = sql.UpdateAccount(model.Username, model.Access, model.Status);
             if (update == true)
                 ModelState.AddModelError("", "Cập Nhật Thành Công");
             else ModelState.AddModelError("", "Cập Nhật Lỗi");
-            return RedirectToAction("FormEdit");
+            return RedirectToAction("index");
         }
         #endregion
         public void Setlist()
@@ -75,6 +84,22 @@ namespace tdtt.Controllers
                        new SelectListItem { Value = "1" , Text = "Vô hiệu Hóa" }
             };
 
+        }
+        [HttpDelete]
+        public ActionResult delete(string id)
+        {
+            bool res = sql.delete(id);
+
+
+            return RedirectToAction("index");
+
+
+        }
+        
+        public ActionResult reset(string id)
+        {
+            sql.reset(id);
+            return RedirectToAction("index");
         }
     }
 }

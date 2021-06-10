@@ -1,0 +1,66 @@
+﻿@model IEnumerable<DataContext.ViewModel.DataPoint>
+
+@{
+    ViewBag.Title = "DataPoint";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var file = (DataContext.DataTable.FileData)ViewBag.file;
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Hệ Thống Lĩnh Vực và Loại Nhiệm Vụ</h6>
+    </div>
+    <div class="card-body">
+
+        <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+            <div class="row">
+                <div class="col-sm-12">
+                    <table class="table">
+
+                        <tr>
+                            <th>
+                                Mã Nhiệm Vụ
+                            </th>
+                            <th>
+                                Lĩnh Vực
+                            </th>
+                            <th>
+                                Loại Nhiệm Vụ
+                            </th>
+
+                        </tr>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.IdP</td>
+                                <td>@item.Name</td>
+                                <td>@item.NameP</td>
+
+                            </tr>
+                        }
+
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="gmail_default" style="font-family: 'times new roman', serif; font-size: large;">Thông tin chi tiết trong các files đính kèm.</div>
+        <p style="font-style:initial; color:black">Trân trọng./.</p>
+        <div class="alert alert-success" role="alert">
+            <strong>File đính kèm:</strong>
+            <br>
+
+            @if (file.FileName != null)
+            {
+                <a href="@Url.Action("DownloadFilePoint","Home",new { filename = file.FileName})">@file.FileName</a>
+
+            }
+            else
+            {
+                <p> </p>
+            }
+
+
+        </div>
+    </div>
+</div>

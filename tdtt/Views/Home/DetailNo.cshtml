@@ -35,8 +35,8 @@
         {
             if (@item.FileName!=null)
             {
-                <a href="@Url.Action("Download","Home",new { filename = item.FileName})">@item.FileName</a>
-                <a href="@Url.Action("Download","Home",new { filename = item.FileName})"><i class="fas fa-download"></i></a>
+                <a href="@Url.Action("DownloadFileTB","Home",new { filename = item.FileName})">@item.FileName</a>
+                <a href="@Url.Action("DownloadFileTB","Home",new { filename = item.FileName})"><i class="fas fa-download"></i></a>
             }
             else
                 {

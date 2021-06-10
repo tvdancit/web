@@ -6,14 +6,13 @@
     string user = ViewBag.user;
 }
 
-<h2>FormChange</h2>
 
 @using (Html.BeginForm("Change","Account",FormMethod.Post))
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>ChangePasswordModel</h4>
+        <h4>Đổi Mật Khẩu</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 

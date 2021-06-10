@@ -1,7 +1,9 @@
 ﻿using DataContext.DataMethod;
+using DataContext.DataTable;
 using DataContext.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -40,10 +42,25 @@ namespace tdtt.Controllers
             return View();
         }
        
-        public FileResult Download(string filename)
+        public FileResult DownloadFileTB(string filename)
         {
+            
             var FileVirtualPath = "~/FileFolder/Thong-bao/" + filename;
             return File(FileVirtualPath, "application/force-download", Path.GetFileName(FileVirtualPath));
+        }
+        #endregion
+        #region
+        public FileResult DownloadFilePoint(string filename)
+        {
+
+            var FileVirtualPath = "~/FileFolder/Bang-diem/" + filename;
+            return File(FileVirtualPath, "application/force-download", Path.GetFileName(FileVirtualPath));
+        }
+        public ActionResult DataPoint()
+        {
+            var model = new PointSQL().GetPoints();
+            ViewBag.file = new PointSQL().getFile();
+            return View(model);
         }
         #endregion
         // đăng ký đe tai cho sinh vien
@@ -71,6 +88,25 @@ namespace tdtt.Controllers
             return RedirectToAction("CreateTopicStd");
         }
         #endregion
+        // xem lịch báo cáo
+        public ActionResult Statement()
+        {
+            var model = new StatementSQL().GetStatements();
+            return View(model);
+        }
+        public ActionResult DetailStatement(int id,string date)
+        {
+            var model = new StatementSQL().GetDetailsById(id);
+            ViewBag.date = new StatementSQL().GetStatementsId(id).DateRp.ToShortDateString();
+            return View(model);
+        }
+        public ActionResult getType(string IdTy)
+        {
+            //tdtt.Configuration.ProxyCreationEnabled = false;         
+            List<PointTable> list = new PointSQL().GetPoints(IdTy);
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
+      
     }
 
 

@@ -39,7 +39,7 @@ namespace tdtt.Controllers
                     }
                     else if (userSess.Type == 1)
                     {
-                        return RedirectToAction("Index", "ScienceResearchMng");
+                        return RedirectToAction("Index", "Manager");
                     }
                     else if (userSess.Type == 2)
                     {

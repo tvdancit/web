@@ -18,10 +18,7 @@ namespace DataContext.DataTable
         public int IdSt { get; set; }
 
         [Column(TypeName = "date")]
-        public DateTime? DateRp { get; set; }
-
-        [Column(TypeName = "ntext")]
-        public string Status { get; set; }
+        public DateTime DateRp { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DetailStatementLe> DetailStatementLes { get; set; }
