@@ -77,7 +77,7 @@ create table Types
 	DateSt date,
 	Times int,
 	Expense float,
-	Status ntext default 2, --1 accept, 2 pending, 0 Reject
+	Status int default 2, --1 accept, 2 pending, 0 Reject
 	foreign key (IdLe) references Information(IdLe),
 	foreign key (IdP) references PointTable(IdP)
  )
